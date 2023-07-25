@@ -1,0 +1,7 @@
+node_modules
+build
+tests
+.env
+
+*.log
+google-credentials
