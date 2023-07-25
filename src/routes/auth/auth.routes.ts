@@ -1,6 +1,6 @@
 import { Router, IRouter } from "express";
 import authController from "./auth.controller";
-import authValidations from "./auth.validations";
+import authValidations from "../../modules/auth/auth.validations";
 
 class AuthRoutes {
   public router: IRouter;

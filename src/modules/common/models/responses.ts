@@ -48,6 +48,10 @@ export const ERROR_STATUS_RESPONSES: IErrorResponses = {
         status: 406,
         message: 'Not Acceptable',
     },
+    407: {
+        status: 407,
+        message: 'sessionId has expired',
+    },
     500: {
         status: 500,
         message: 'Internal Server Error',

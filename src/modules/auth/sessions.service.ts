@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import db from "../db.module";
 import { MongoOperation } from "../common/interfaces/MongoOperation.interface";
-import { ObjectId } from "mongodb";
+import { Filter, ObjectId } from "mongodb";
 import { SessionsSchema } from "./auth.interface";
 
 class SessionsService {
@@ -14,19 +14,27 @@ class SessionsService {
       userId,
     };
     const res = await this.collection.insertOne(data);
-    
-    if(res.acknowledged == true) {
-        return {
-            data,
-            status: "success",
-            statusCode: 200,
-        }
+
+    if (res.acknowledged == true) {
+      return {
+        data,
+        status: "success",
+        statusCode: 200,
+      };
     }
     return {
-        data,
-        status: "error",
-        statusCode: 500,
+      data,
+      status: "error",
+      statusCode: 500,
     };
+  }
+
+  async find(filter: Filter<SessionsSchema>): Promise<SessionsSchema | null> {
+    const session = await this.collection.findOne(filter);
+    if (!session) {
+      return null;
+    }
+    return session;
   }
 }
 

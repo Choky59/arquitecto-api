@@ -5,3 +5,4 @@ tests
 
 *.log
 google-credentials
+serviceAccount.json

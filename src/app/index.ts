@@ -6,11 +6,8 @@ import configLogger from './config/winston.config'
 import setupRoutes from './config/routes.config'
 import checkEnviroment from './config/enviroment.config'
 import { enviroment } from '../modules/config.module'
-
-
 class App {
     public app: express.Application
-
     constructor() {
         this.app = express()
         this.setup()
@@ -20,6 +17,7 @@ class App {
         this.app.use(express.json({limit: "50mb"}))
         this.app.use(helmet())
         this.app.use(cors({ credentials: true, origin: true }));
+        this.app.use(express.urlencoded({ extended: true }));
         configLogger()
         checkEnviroment()
         setupRoutes(this.app)

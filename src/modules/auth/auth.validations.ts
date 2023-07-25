@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import { createValidation } from "../../modules/common/services/validators";
+import { createValidation } from "../common/services/validators";
 export default {
   createUser: () =>
     createValidation([
