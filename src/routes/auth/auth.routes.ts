@@ -1,6 +1,7 @@
 import { Router, IRouter } from "express";
 import authController from "./auth.controller";
 import authValidations from "../../modules/auth/auth.validations";
+import { validateSession } from "../../middlewares/authorization";
 
 class AuthRoutes {
   public router: IRouter;
@@ -11,8 +12,9 @@ class AuthRoutes {
   }
 
   private setup() {
-    this.router.post("/", authValidations.createUser(), authController.createUser);
-    this.router.post("/session", authValidations.createSession(),authController.createSession);
+    this.router.get("/", [validateSession], authController.getUser);
+    this.router.post("/", [validateSession] , authValidations.createUser(), authController.createUser);
+    this.router.post("/session", authValidations.createSession(), authController.createSession);
   }
 }
 

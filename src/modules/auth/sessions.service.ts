@@ -29,7 +29,7 @@ class SessionsService {
     };
   }
 
-  async find(filter: Filter<SessionsSchema>): Promise<SessionsSchema | null> {
+  async findOne(filter: Filter<SessionsSchema>): Promise<SessionsSchema | null> {
     const session = await this.collection.findOne(filter);
     if (!session) {
       return null;

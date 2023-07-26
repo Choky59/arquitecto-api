@@ -25,12 +25,12 @@ export function apiAuthorization(req: Request, res: Response, next: NextFunction
 export async function validateSession(req: Request, res: Response, next: NextFunction) {
   const sessionId = req.header("sessionid");
   if (!sessionId) {
-    return sendResponse({ res }, 401);
+    return sendResponse({ res }, 408);
   }
 
-  const session = await sessionsService.find({ token: sessionId });
+  const session = await sessionsService.findOne({ token: sessionId });
 
-  if (!session) return sendResponse({ res }, 404);
+  if (!session) return sendResponse({ res }, 409);
 
   const today = new Date();
   const expires = session.expiresAt;

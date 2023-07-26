@@ -14,4 +14,5 @@ export interface SessionsSchema {
     userId: ObjectId;
     createdAt: Date;
     expiresAt: Date;
+    
 }

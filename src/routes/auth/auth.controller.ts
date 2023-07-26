@@ -4,6 +4,14 @@ import authService from "../../modules/auth/auth.service";
 import sessionsService from "../../modules/auth/sessions.service";
 
 class AuthController {
+  
+  public async getUser(req: Request, res: Response) {
+    const sessionId = req.header("sessionId");
+    const session = await sessionsService.findOne({ token: sessionId });
+    const { password, ...rest } = (await authService.find({ _id: session!.userId }))!;
+    return sendResponse({ res, data: { ...rest, token: session!.token } }, 200);
+  }
+
   public async createUser(req: Request, res: Response) {
     const body = req.body as { username: string; password: string };
     const result = await authService.createUser(body);
@@ -18,7 +26,7 @@ class AuthController {
     if (!userExists) {
       return sendResponse({ res }, 519);
     }
-    
+
     const result = await sessionsService.createSession(userExists._id!);
     return sendResponse({ res, data: result.data }, result.statusCode);
   }

@@ -52,6 +52,14 @@ export const ERROR_STATUS_RESPONSES: IErrorResponses = {
         status: 407,
         message: 'sessionId has expired',
     },
+    408: {
+        status: 408,
+        message: 'missing sessionId',
+    },
+    409: {
+        status: 409,
+        message: 'sessionId is invalid',
+    },
     500: {
         status: 500,
         message: 'Internal Server Error',
