@@ -7,14 +7,14 @@ export default {
     createValidation([
       body("name")
         .notEmpty()
-        .withMessage("username is required")
+        .withMessage("name is required")
         .isString()
-        .withMessage("username must be a string"),
+        .withMessage("name must be a string"),
       body("description")
         .notEmpty()
-        .withMessage("password is required")
+        .withMessage("description is required")
         .isString()
-        .withMessage("password must be a string"),
+        .withMessage("description must be a string"),
       body("priority")
         .notEmpty()
         .withMessage("priority is required")
@@ -24,8 +24,6 @@ export default {
   addAsset: () =>
     createValidation([
       body("proyect")
-        .notEmpty()
-        .withMessage("proyect is required")
         .custom((id) => {
           try {
             new ObjectId(id);
@@ -45,11 +43,30 @@ export default {
         .withMessage("description is required")
         .isString()
         .withMessage("description must be a string"),
-      body("imgUrl").notEmpty().withMessage("imgUrl must be a file"),
+      body("imgBase64")
+        .notEmpty()
+        .withMessage("imgBase64 is required")
+        .isString()
+        .withMessage("imgBase64 must be a string"),
       body("priority")
         .notEmpty()
         .withMessage("priority is required")
         .isNumeric()
         .withMessage("priority must be a number"),
+    ]),
+  deleteDetails: () =>
+    createValidation([
+      body("proyectId")
+        .notEmpty()
+        .withMessage('proyectId is required')
+        .custom((id) => {
+          try {
+            new ObjectId(id);
+          } catch (error) {
+            return false;
+          }
+          return true;
+        })
+        .withMessage("proyectId must be a valid id"),
     ]),
 };

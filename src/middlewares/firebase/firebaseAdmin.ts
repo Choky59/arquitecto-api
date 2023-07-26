@@ -13,6 +13,9 @@ class firebaseAdmin {
   get Bucket() {
     return this.admin.storage().bucket();
   }
+  get Storage() {
+    return this.admin.storage() as any;
+  }
 }
 
 export default new firebaseAdmin();

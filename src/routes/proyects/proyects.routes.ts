@@ -1,6 +1,7 @@
 import { Router, IRouter } from "express";
 import proyectController from "./proyects.controller";
-
+import proyectsValidations from "../../modules/proyects/proyects.validations";
+import { validateSession } from "../../middlewares/authorization";
 
 class AuthRoutes {
   public router: IRouter;
@@ -11,8 +12,14 @@ class AuthRoutes {
   }
 
   private setup() {
-    this.router.post("/", proyectController.createProyect);
-    this.router.post("/asset", proyectController.addAsset);
+
+    this.router.get("/", proyectController.getProyectDetails)
+
+    this.router.post("/", [validateSession],proyectsValidations.createDetails(), proyectController.createDetails);
+    this.router.delete("/", [validateSession],proyectsValidations.deleteDetails(), proyectController.deleteProyectDetails);
+
+    this.router.get("/", proyectController.getAssets)
+    this.router.post("/asset",[validateSession], proyectsValidations.addAsset(), proyectController.addAsset);
   }
 }
 

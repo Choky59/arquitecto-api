@@ -14,7 +14,15 @@ export interface AssetsSchema {
   proyect: ObjectId | null;
   name: string;
   description: string;
-  imgUrl: string;
+  imgUrl?: string;
   createdAt: Date;
+  priority: number;
+}
+
+
+export interface addAssetBody {
+  name: string;
+  description: string;
+  imgBase64: string;
   priority: number;
 }

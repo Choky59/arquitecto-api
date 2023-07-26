@@ -136,8 +136,10 @@ export const ERROR_STATUS_RESPONSES: IErrorResponses = {
         status: 520,
         message: "you do not follow this list",
     },
-
-
+    521: {
+        status: 521,
+        message: "Unable to upload to bucket",
+    },
 
     600: {
         status: 600,
