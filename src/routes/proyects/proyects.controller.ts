@@ -30,8 +30,8 @@ class ProyectsController {
   }
 
   public async getProyectDetails(_: Request, res: Response) {
-    const assets = await detailsService.findAll();
-    return sendResponse({ res, data: { assets } }, 200);
+    const proyects = await detailsService.findAll();
+    return sendResponse({ res, data: { proyects } }, 200);
   }
 
   public async deleteProyectDetails(req: Request, res: Response) {
