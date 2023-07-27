@@ -18,8 +18,8 @@ class AuthRoutes {
     this.router.post("/", [validateSession],proyectsValidations.createDetails(), proyectController.createDetails);
     this.router.delete("/", [validateSession],proyectsValidations.deleteDetails(), proyectController.deleteProyectDetails);
 
-    this.router.get("/", proyectController.getAssets)
-    this.router.post("/asset",[validateSession], proyectsValidations.addAsset(), proyectController.addAsset);
+    this.router.get("/assets", proyectController.getAssets)
+    this.router.post("/assets",[validateSession], proyectsValidations.addAsset(), proyectController.addAsset);
   }
 }
 

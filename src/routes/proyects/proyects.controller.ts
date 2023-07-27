@@ -1,10 +1,10 @@
+import { addAssetBody } from "../../modules/proyects/proyects.interface";
+import { ObjectId } from "mongodb";
 import { Request, Response } from "express";
 import { sendResponse } from "../../modules/common/services/responses";
+import assetsService from "../../modules/proyects/assets.service";
 import detailsService from "../../modules/proyects/details.service";
 import firebaseAdmin from "../../middlewares/firebase/firebaseAdmin";
-import { ObjectId } from "mongodb";
-import assetsService from "../../modules/proyects/assets.service";
-import { addAssetBody } from "../../modules/proyects/proyects.interface";
 
 class ProyectsController {
   public async createDetails(req: Request, res: Response) {
