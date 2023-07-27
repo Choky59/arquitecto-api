@@ -44,7 +44,7 @@ class ProyectsController {
   }
 
   public async addAsset(req: Request, res: Response) {
-    const { name, description, priority, imgBase64 } = req.body as addAssetBody;
+    const { name, description, priority, imgBase64, proyectId } = req.body as addAssetBody;
     const imageBuffer = Buffer.from(imgBase64, "base64");
 
     const data = {
@@ -53,7 +53,9 @@ class ProyectsController {
       priority,
       proyect: null,
       createdAt: new Date(),
+      proyectId: new ObjectId(proyectId),
     };
+
     const assetDocument = await assetsService.insertOne(data);
 
     if (assetDocument.statusCode != 200) {

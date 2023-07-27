@@ -25,4 +25,5 @@ export interface addAssetBody {
   description: string;
   imgBase64: string;
   priority: number;
+  proyectId: string
 }

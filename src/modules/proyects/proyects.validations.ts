@@ -53,6 +53,18 @@ export default {
         .withMessage("priority is required")
         .isNumeric()
         .withMessage("priority must be a number"),
+      body("proyectId")
+        .notEmpty()
+        .withMessage("proyectId is required")
+        .custom((id) => {
+          try {
+            new ObjectId(id);
+          } catch (error) {
+            return false;
+          }
+          return true;
+        })
+        .withMessage("proyectId must be a valid id"),
     ]),
   deleteDetails: () =>
     createValidation([
