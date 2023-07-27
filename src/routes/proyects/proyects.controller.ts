@@ -33,6 +33,12 @@ class ProyectsController {
     const proyects = await detailsService.findAll();
     return sendResponse({ res, data: { proyects } }, 200);
   }
+  
+  public async getProyectAssetsById(req: Request, res: Response) {
+    const { id } = req.params as { id: string };
+    const proyects = await detailsService.find({ proyectId: new ObjectId(id) });
+    return sendResponse({ res, data: { proyects } }, 200);
+  }
 
   public async deleteProyectDetails(req: Request, res: Response) {
     const { proyectId } = req.body as { proyectId: string };
@@ -51,7 +57,6 @@ class ProyectsController {
       name,
       description,
       priority,
-      proyect: null,
       createdAt: new Date(),
       proyectId: new ObjectId(proyectId),
     };

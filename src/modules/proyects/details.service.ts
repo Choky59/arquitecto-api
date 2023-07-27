@@ -6,6 +6,11 @@ class DetailsService {
   private collection = db.Proyects.Details();
 
 
+  async find(filter: Filter<DetailsSchema>): Promise<DetailsSchema[]> {
+    const res = await this.collection.find(filter).toArray();
+    return res
+  }
+
   async findAll(): Promise<DetailsSchema[]> {
     const res = await this.collection.find({}).toArray();
     return res

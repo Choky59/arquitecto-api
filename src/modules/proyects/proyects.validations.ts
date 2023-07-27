@@ -1,4 +1,4 @@
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import { createValidation } from "../common/services/validators";
 import { ObjectId } from "mongodb";
 
@@ -97,5 +97,18 @@ export default {
         })
         .withMessage("Not all keys are valid"),
       body("id").notEmpty().withMessage("id is required"),
+    ]),
+  getProyectAssetsById: () =>
+    createValidation([
+      param("id").custom((id) => {
+        try {
+          new ObjectId(id);
+        } catch (error) {
+          return false;
+        }
+        return true;
+      }).withMessage("id must be a valid id")
+      
+      ,
     ]),
 };

@@ -11,7 +11,7 @@ export interface DetailsSchema {
 
 export interface AssetsSchema {
   _id?: ObjectId;
-  proyect: ObjectId | null;
+  proyectId: ObjectId | null;
   name: string;
   description: string;
   imgUrl?: string;
