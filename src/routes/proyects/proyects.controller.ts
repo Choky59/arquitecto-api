@@ -78,6 +78,23 @@ class ProyectsController {
       return sendResponse({ res }, 521);
     }
   }
+
+  public async updateProyectDetails(req: Request, res: Response) {
+    const { id } = req.body as {
+      id: string;
+      name?: string;
+      description?: string;
+      priority?: number;
+      imgUrl?: string;
+    };
+
+    const proyect = await detailsService.findOne({ _id: new ObjectId(id) });
+    if (!proyect) return sendResponse({ res }, 505);
+    const result = await detailsService.updateOne({ _id: new ObjectId(id) }, { $set: req.body });
+
+    console.log();
+    return sendResponse({ res, data: { result } }, 200);
+  }
 }
 
 export default new ProyectsController();

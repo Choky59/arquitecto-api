@@ -58,7 +58,7 @@ export default {
     createValidation([
       body("proyectId")
         .notEmpty()
-        .withMessage('proyectId is required')
+        .withMessage("proyectId is required")
         .custom((id) => {
           try {
             new ObjectId(id);
@@ -68,5 +68,22 @@ export default {
           return true;
         })
         .withMessage("proyectId must be a valid id"),
+    ]),
+  updateDetails: () =>
+    createValidation([
+      body()
+        .notEmpty()
+        .custom(async (params) => {
+          const validParams = ["id", "name", "description", "priority", "imgUrl"];
+          const keys = Object.keys(params);
+          for (let i = 0; i < keys.length; i++) {
+            if (!validParams.includes(keys[i])) {
+              return false;
+            }
+          }
+          return true;
+        })
+        .withMessage("Not all keys are valid"),
+      body("id").notEmpty().withMessage("id is required"),
     ]),
 };

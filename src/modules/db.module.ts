@@ -29,7 +29,7 @@ class Database {
   get Proyects() {
     return {
       Details: (): Collection<DetailsSchema> => {
-        return this.mongoClient.db("proyects").collection<DetailsSchema>("users");
+        return this.mongoClient.db("proyects").collection<DetailsSchema>("details");
       },
       Assets: (): Collection<AssetsSchema> => {
         return this.mongoClient.db("proyects").collection<AssetsSchema>("assets");

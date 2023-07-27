@@ -31,6 +31,11 @@ class DetailsService {
     const res = await this.collection.findOne(filter);
     return res
   }
+
+  async updateOne(filter: Filter<DetailsSchema>, updateFilter: Filter<DetailsSchema>) {
+    const res = await this.collection.updateOne(filter,updateFilter);
+    return res
+  }
 }
 
 export default new DetailsService();
