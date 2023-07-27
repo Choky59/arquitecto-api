@@ -25,7 +25,7 @@ class ProyectsController {
   }
 
   public async getAssets(_: Request, res: Response) {
-    const assets = await detailsService.findAll();
+    const assets = await assetsService.findAll();
     return sendResponse({ res, data: { assets } }, 200);
   }
 
