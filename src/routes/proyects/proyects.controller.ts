@@ -36,8 +36,9 @@ class ProyectsController {
   
   public async getProyectAssetsById(req: Request, res: Response) {
     const { id } = req.params as { id: string };
-    const proyects = await detailsService.find({ proyectId: new ObjectId(id) });
-    return sendResponse({ res, data: { proyects } }, 200);
+    console.log(id)
+    const assets = await assetsService.find({ proyectId: new ObjectId(id) });
+    return sendResponse({ res, data: { assets } }, 200);
   }
 
   public async deleteProyectDetails(req: Request, res: Response) {
