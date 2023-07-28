@@ -45,6 +45,17 @@ class ProyectsController {
     const { proyectId } = req.body as { proyectId: string };
     const mongoProyectId = new ObjectId(proyectId);
     const proyect = await detailsService.findOne({ _id: mongoProyectId });
+    const assets = await assetsService.find({ proyectId: mongoProyectId });
+
+    try {
+      for (let i = 0; i < assets.length; i++) {
+        const assetId = assets[i]._id;
+        const destination = `images/${assetId}.jpg`;
+        await firebaseAdmin.Bucket.file(destination).delete();
+        await assetsService.deleteOne({ _id: new ObjectId(assetId) });
+      }
+    } catch {}
+
     if (!proyect) return sendResponse({ res }, 505);
     await detailsService.deleteOne({ _id: mongoProyectId });
     return sendResponse({ res, data: { deleted: { ...proyect }, status: "deleted" } }, 200);
