@@ -33,10 +33,10 @@ class ProyectsController {
     const proyects = await detailsService.findAll();
     return sendResponse({ res, data: { proyects } }, 200);
   }
-  
+
   public async getProyectAssetsById(req: Request, res: Response) {
     const { id } = req.params as { id: string };
-    console.log(id)
+    console.log(id);
     const assets = await assetsService.find({ proyectId: new ObjectId(id) });
     return sendResponse({ res, data: { assets } }, 200);
   }
@@ -50,6 +50,18 @@ class ProyectsController {
     return sendResponse({ res, data: { deleted: { ...proyect }, status: "deleted" } }, 200);
   }
 
+  public async deleteAsset(req: Request, res: Response) {
+    const { assetId } = req.body as { assetId: string };
+    if (!assetId) return sendResponse({ res, data: { error: "missing asset id param" } }, 505);
+
+    const destination = `images/${assetId}.jpg`;
+    try {
+      await firebaseAdmin.Bucket.file(destination).delete();
+      await assetsService.deleteOne({ _id: new ObjectId(assetId) });
+    } catch {}
+
+    return sendResponse({ res, data: { message: "Delete ok" } }, 200);
+  }
   public async addAsset(req: Request, res: Response) {
     const { name, description, priority, imgBase64, proyectId } = req.body as addAssetBody;
     const imageBuffer = Buffer.from(imgBase64, "base64");

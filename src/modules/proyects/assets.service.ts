@@ -6,13 +6,10 @@ import { MongoOperation } from "../common/interfaces/MongoOperation.interface";
 class AssetsService {
   private collection = db.Proyects.Assets();
 
-
-
   async find(filter: Filter<AssetsSchema>): Promise<AssetsSchema[]> {
     const res = await this.collection.find(filter).toArray();
     return res
   }
-
 
   async findAll(): Promise<AssetsSchema[]> {
     const res = await this.collection.find({}).toArray();

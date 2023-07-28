@@ -100,15 +100,28 @@ export default {
     ]),
   getProyectAssetsById: () =>
     createValidation([
-      param("id").custom((id) => {
-        try {
-          new ObjectId(id);
-        } catch (error) {
-          return false;
-        }
-        return true;
-      }).withMessage("id must be a valid id")
-      
-      ,
+      param("id")
+        .custom((id) => {
+          try {
+            new ObjectId(id);
+          } catch (error) {
+            return false;
+          }
+          return true;
+        })
+        .withMessage("id must be a valid id"),
+    ]),
+  deleteAsset: () =>
+    createValidation([
+      param("assetId")
+        .custom((id) => {
+          try {
+            new ObjectId(id);
+          } catch (error) {
+            return false;
+          }
+          return true;
+        })
+        .withMessage("assetId must be a valid id"),
     ]),
 };
